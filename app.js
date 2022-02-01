@@ -57,14 +57,14 @@ const game = {
 
     resetRange: function() {
       // if the most recent guess stored in prevGuesses is larger than secretNum
-      if (this.prevGuesses[this.prevGuesses - 1] > this.secretNum){
+      if (this.prevGuesses[this.prevGuesses.length - 1] > this.secretNum){
         // sets players last guess equal to the players biggestNum
-        this.biggestNum = this.prevGuesses[this.prevGuesses - 1];
+        this.biggestNum = this.prevGuesses[this.prevGuesses.length - 1];
       } 
       // if prevGuesses is less than secretNum
-      if (this.prevGuesses[this.prevGuesses -1] < this.secretNum){
+      if (this.prevGuesses[this.prevGuesses.length -1] < this.secretNum){
         //set players last guess equal to the smallestNum
-        this.smallestNum = this.prevGuesses[this.prevGuesses - 1];
+        this.smallestNum = this.prevGuesses[this.prevGuesses.length - 1];
       }
     },
     render: function(){
