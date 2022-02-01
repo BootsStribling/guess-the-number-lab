@@ -1,4 +1,5 @@
 //Guess the Number Lab
+console.log('test');
 
 const game = {
   title: 'Guess the Number',
@@ -12,8 +13,14 @@ const game = {
     return
   },
   getGuess: function() {
-    //determines that player has inputted information
-    while(playerGuess === null){}
+      let guess
+      while (isNaN(guess) || guess < this.smallestNum || guess > this.biggestNum){
+        guess = prompt('Guess a number.');
+        guess = parseInt(guess);
+      }
+      do{
+      //determines that player has inputted information
+      }while([game.prevGuesses[game.prevGuesses-1]] === null)
       //determines that player input is a number and is less than biggestNum and greater than smallestNum
       if(typeof playerGuess === 'number' && playerGuess < game.biggestNum &&       playerGuess > game.smallestNum){
         //pushes player Guess to prevGuess array in game object
@@ -47,13 +54,9 @@ const game = {
       console.log(`Your previous guess were ${game.prevGuesses.join()}`);
     }
   },
-  clear: function(){
-    console.clear();
-  },
   prevGuesses: []
 }
 
-let playerGuess = 55;
 
 // game.play();
 
@@ -65,3 +68,5 @@ let playerGuess = 55;
 //   getGuess();
 //   render();
 // }
+
+
