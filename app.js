@@ -2,13 +2,13 @@
 
 const game = {
   title: 'Guess the Number',
-  biggestNum: null,
-  smallestNum: null,
+  biggestNum: 3,
+  smallestNum: 0,
   secretNum: null,
   prevGuesses: [],
   play: function() {
-    //calls the change range into the biggest and smallest number key pairs in game object
-    // this.changeRange();
+    //prompts user to choose largest range and smallest range for the game
+    this.adjustRange();
     //gets the secret number 
     this.secretNum = 
       Math.floor(Math.random() * (this.biggestNum-this.smallestNum + 1)) + this.smallestNum;
@@ -16,14 +16,12 @@ const game = {
     do{
       //Get users guess and push to prevGuesses
       this.prevGuesses.push(this.getGuess());
-      //changes range with changeRange
-      // this.changeRange();
+      //changes range with resetRange
+      this.resetRange();
       //calls render to analyze user guess
       this.render();
     }while (this.prevGuesses[this.prevGuesses.length-1] !== this.secretNum);
-
     //return the guess after the loop is complete
-    return guess;
   },
   getGuess: function() {
     //guess
@@ -31,18 +29,18 @@ const game = {
     //code block completes when the below while condition is true, but only exits the loop with the return statement when the while condition is false 
     do {
       // point guess at the rounded number for the player's guess 
-      guess = Math.round(
+      guess = parseInt(
         prompt(`Guess a number between ${this.biggestNum} and ${this.smallestNum}`)
       )
     //if     
-    } while(typeof guess !== 'number' || guess < this.smallestNum || guess > this.biggestNum)
+    } while(isNaN(guess) || guess < this.smallestNum || guess > this.biggestNum)
     // once above condition is false, completes the code block and returns guess
       return guess;
     },
     adjustRange: function(){
       do{
         //Assign smallest number in range to a rounded integer
-        this.smallestNum = Math.round(
+        this.smallestNum = parseInt(
           prompt(`Enter a number that will be the low end of the range.`)
         );
       //while smallest Num is not a number
@@ -50,7 +48,7 @@ const game = {
       
       do {
         //Prompt and assign biggest number in the range to a rounded integer
-        this.biggestNum = Math.round(
+        this.biggestNum = parseInt(
           prompt(`Enter a number that will be the high end of the range.`)
         )
         //while biggest num is no a number
@@ -70,49 +68,35 @@ const game = {
       }
     },
     render: function(){
-      //initialize message variable
+      //initialize result variable
       let result;
-      if(this.prevGuesses[this.prevGuesses -1] === this.secreNum){
+      if(this.prevGuesses[this.prevGuesses.length - 1] === this.secretNum){
         //make the result message the victory message
         result = `Congratulations! You guessed in ${this.prevGuesses.length}`;
       }
-      if 
-    }
-      
-  render: function(){
-    //display messages
-    // if(playerGuess === game.secretNum){
-    //   console.log(`Congratulations! You guessed in ${game.prevGuesses.length} tries!`);
-    //   game.secretNum = null;
-    // }
-    // if(playerGuess < game.secretNum){
-    //   console.log(`Ooh incorrect. Guess higher.`);
-    //   if(game.prevGuesses.length > 1){
-    //     console.log(`Your previous guesses were ${game.prevGuesses.join()}`);
-    //   }else{
-    //     console.log(`Your previous guess was ${game.prevGuesses.join(' ,')}`)
-    //   }
-    // }
-    // if(playerGuess > game.secretNum){
-    //   console.log(`Ooh incorrect. Guess lower.`);
-    //   console.log(`Your previous guess were ${game.prevGuesses.join()}`);
-    // }
-  }
-  
-}
+      if(this.prevGuesses[this.prevGuesses.length - 1] < this.secretNum){
+        result = `Ooh that's too low. Prev Guesses: ${this.prevGuesses.join(',')}.`
+      }
+      if(this.prevGuesses[this.prevGuesses.length - 1] > this.secretNum){
+        result = `Ooh that's too high. Prev Guesses: ${this.prevGuesses.join(', ')}.`
+      }
+      alert(result)
+    },
+    
+};
 
 
-// game.play();
+game.play();
 
 
-//Difference between Math.round and parseInt();
-let num = -1.72323234234234;
-let num2 = Math.round(num);
-let num3 = parseInt(num);
-let num4 = isNaN(num);
-console.log(num2);
-console.log(num3);
-console.log(num4);
+//Difference between Math.round and parseInt() and isNaN();
+// let num = -1.72323234234234;
+// let num2 = Math.round(num);
+// let num3 = parseInt(num);
+// let num4 = isNaN(num);
+// console.log(num2);
+// console.log(num3);
+// console.log(num4);
 
 
 // while(playerGuess !== game.secretNum){
